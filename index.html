@@ -11,11 +11,6 @@
             --text-main: #333333; --text-secondary: #666666; --text-card: #333333;
             --border-color: #eeeeee; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
             --shadow: 0 5px 15px rgba(0,0,0,0.1); --animacao-display: none; 
-            
-            /* CORES ESPECÍFICAS DO FAQ (MODO CLARO) */
-            --faq-bg: #f2f2f2;
-            --faq-title: #000000; /* Preto absoluto pra destacar */
-            --faq-text: #222222; /* Quase preto pra leitura fácil */
         }
         
         /* TEMA ANO NOVO */
@@ -25,15 +20,10 @@
             --text-main: #ffffff; --text-secondary: #cccccc; --text-card: #333333; 
             --border-color: #FFD700; --primary: #FFD700; --hero-bg: transparent; --hero-text: #FFD700; 
             --shadow: 0 10px 25px rgba(255, 215, 0, 0.3); --animacao-display: block; 
-            
-            /* CORES ESPECÍFICAS DO FAQ (MODO ESCURO) */
-            --faq-bg: rgba(255,255,255,0.1);
-            --faq-title: #FFD700; /* DOURADO pra chamar atenção */
-            --faq-text: #ffffff; /* BRANCO PURO pra leitura */
         }
 
         /* --- 2. CSS GERAL --- */
-        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-body); color: var(--text-main); transition: background 0.5s ease, color 0.5s ease; min-height: 100vh; overflow-x: hidden; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-body); color: var(--text-main); transition: background 0.5s ease, color 0.5s ease; min-height: 100vh; overflow-x: hidden; padding-bottom: 80px; }
         
         .welcome-bar { background-color: var(--primary); color: #fff; text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; transition: 0.3s; }
         body.tema-anonovo .welcome-bar { color: #333; }
@@ -76,32 +66,6 @@
         body.tema-anonovo .btn-buy { color: #333; }
         .btn-buy:hover { opacity: 0.9; }
 
-        /* --- FAQ MELHORADO --- */
-        .faq-section { max-width: 800px; margin: 50px auto; padding: 0 20px; position: relative; z-index: 10; }
-        .faq-section h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; color: var(--primary); }
-        .faq-item { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
-        
-        .faq-question {
-            background: var(--faq-bg); 
-            color: var(--faq-title); /* Cor visual forte */
-            padding: 18px 20px; width: 100%; text-align: left;
-            border: none; outline: none; cursor: pointer; font-size: 1.15rem; font-weight: 700;
-            display: flex; justify-content: space-between; align-items: center; transition: background 0.3s;
-        }
-        .faq-question:hover { background: rgba(0,0,0,0.05); }
-        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--primary); font-weight: bold; }
-        .faq-item.active .faq-question::after { content: '-'; }
-        
-        .faq-answer {
-            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; 
-            background: var(--bg-card);
-            padding: 0 20px; 
-            color: var(--faq-text); /* Cor de leitura facilitada */
-            font-size: 1.05rem;
-            line-height: 1.6;
-        }
-        .faq-item.active .faq-answer { padding: 25px 20px; max-height: 300px; }
-
         /* MODAL */
         .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; animation: fadeIn 0.3s; }
         .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); animation: zoomIn 0.3s; }
@@ -109,7 +73,34 @@
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
         @keyframes zoomIn { from {transform: scale(0.8)} to {transform: scale(1)} }
 
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
+        .btn-whatsapp-float {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            z-index: 2000; /* Alto para ficar acima de tudo */
+            transition: transform 0.3s ease, background-color 0.3s;
+            font-size: 1rem;
+        }
+
+        .btn-whatsapp-float:hover {
+            transform: scale(1.05);
+            background-color: #20bd5a;
+        }
+
         footer { text-align: center; padding: 20px; background: rgba(0,0,0,0.5); color: #fff; margin-top: 40px; position: relative; z-index: 10; }
+        
+        /* ANIMAÇÃO BRILHOS */
         .sparkle { position: fixed; width: 6px; height: 6px; border-radius: 50%; background-color: #FFD700; box-shadow: 0 0 10px 2px #FFD700; top: 100%; z-index: 1; opacity: 0; animation: subir 5s linear infinite; display: var(--animacao-display); }
         @keyframes subir { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
         .s1 { left: 10%; animation-duration: 4s; animation-delay: 0s; } .s2 { left: 25%; animation-duration: 5s; animation-delay: 1s; } .s3 { left: 40%; animation-duration: 3.5s; animation-delay: 2s; }
@@ -140,7 +131,6 @@
                 <a href="https://rastreamento.correios.com.br/app/index.php" target="_blank" class="btn-rastreio">Rastrear Pedido</a>
                 
                 <button id="btn-tema" class="btn-theme" title="Modo Ano Novo">🥂</button>
-                <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
             </div>
         </div>
     </header>
@@ -156,37 +146,15 @@
         </div>
     </div>
 
-    <div class="faq-section">
-        <h2>Perguntas Frequentes</h2>
-        
-        <div class="faq-item">
-            <button class="faq-question">Qual o prazo de entrega?</button>
-            <div class="faq-answer">
-                <p>Nossos produtos são enviados em até 24 horas úteis após a confirmação do pagamento. O prazo médio de entrega é de 5 a 12 dias úteis para todo o Brasil.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">Tem código de rastreio?</button>
-            <div class="faq-answer">
-                <p>Sim! Todos os pedidos possuem código de rastreamento. Você pode usar a opção "Rastrear Pedido" no menu acima para ir direto ao site dos Correios.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">Por que a embalagem é diferente?</button>
-            <div class="faq-answer">
-                <p>Para garantir o frete mais rápido e barato do Brasil, utilizamos centros de distribuição parceiros (Logística Reversa e Marketplaces). Por isso, sua caixa pode conter identificação de nossos parceiros logísticos.</p>
-            </div>
-        </div>
-
-        <div class="faq-item">
-            <button class="faq-question">É seguro comprar?</button>
-            <div class="faq-answer">
-                <p>Totalmente. Utilizamos pagamento via Pix seguro e garantimos a entrega do seu produto ou seu dinheiro de volta. Você tem garantia de 7 dias após o recebimento.</p>
-            </div>
-        </div>
-    </div>
+    <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda%20com%20um%20pedido." 
+       class="btn-whatsapp-float" 
+       target="_blank">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382C17.283 14.288 16.353 13.829 16.18 13.735C16.007 13.641 15.881 13.593 15.755 13.782C15.629 13.971 15.269 14.394 15.158 14.52C15.048 14.646 14.938 14.662 14.749 14.568C14.56 14.474 13.951 14.274 13.228 13.629C12.648 13.112 12.256 12.473 12.146 12.284C12.036 12.095 12.134 11.993 12.228 11.9C12.313 11.815 12.417 11.679 12.511 11.569C12.605 11.459 12.637 11.38 12.699 11.254C12.762 11.128 12.73 11.018 12.683 10.924C12.636 10.83 12.258 9.899 12.1 9.521C11.947 9.155 11.791 9.205 11.674 9.205C11.565 9.205 11.439 9.205 11.313 9.205C11.187 9.205 10.983 9.252 10.81 9.441C10.637 9.63 10.149 10.086 10.149 11.015C10.149 11.944 10.825 12.841 10.92 12.967C11.014 13.093 12.235 15.071 14.186 15.826C15.845 16.469 16.186 16.355 16.548 16.323C16.963 16.287 17.828 15.826 18.006 15.322C18.185 14.819 18.185 14.394 18.138 14.315C18.091 14.236 17.965 14.19 17.776 14.096H17.472V14.382Z" fill="white"/>
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.008 0C5.385 0 0 5.385 0 12.008C0 14.116 0.547 16.164 1.587 17.969L0.518 21.895L4.545 20.839C6.264 21.777 8.169 22.25 10.126 22.25H10.134C16.749 22.25 22.134 16.865 22.134 10.242C22.134 7.031 20.884 4.015 18.614 1.743C16.344 -0.529 13.328 0 10.126 0H12.008ZM12.008 20.378C10.222 20.378 8.475 19.897 6.947 18.989L6.584 18.774L2.835 19.757L3.835 16.103L3.599 15.729C2.607 14.153 2.084 12.332 2.084 10.468C2.084 4.991 6.541 0.534 12.018 0.534C14.671 0.534 17.165 1.568 19.041 3.444C20.917 5.32 21.951 7.814 21.951 10.468C21.951 15.945 17.494 20.378 12.008 20.378Z" fill="white"/>
+        </svg>
+        Suporte
+    </a>
 
     <footer>
         <p>&copy; <span id="ano-atual"></span> DropNacional. Feliz Ano Novo! ✨</p>
@@ -205,18 +173,12 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
+        // --- ATENÇÃO: COLOQUE SEU NÚMERO AQUI TAMBÉM ---
         const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
-        document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
-
-        const acc = document.getElementsByClassName("faq-question");
-        for (let i = 0; i < acc.length; i++) {
-            acc[i].addEventListener("click", function() {
-                this.parentElement.classList.toggle("active");
-            });
-        }
-
+        
+        // Modal de Imagem
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("imgAmpliada");
         const closeBtn = document.getElementById("closeModal");
@@ -225,6 +187,7 @@
         closeBtn.onclick = () => { modal.style.display = "none"; }
         window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
 
+        // Lógica do Tema
         const btnTema = document.getElementById('btn-tema');
         const heroTitle = document.getElementById('hero-title');
         const heroDesc = document.getElementById('hero-desc');
@@ -255,6 +218,7 @@
             setTimeout(() => { aplicarTema(isAnoNovo); btnTema.classList.remove('girar'); }, 200);
         });
 
+        // Firebase - Listar Produtos
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const divLista = document.getElementById('lista-produtos');
@@ -288,6 +252,7 @@
             });
         });
 
+        // Botão de Pedido (Card do produto)
         window.pedirZap = (id, nome, preco) => {
             const seletor = document.getElementById(`tamanho-${id}`);
             let tamanhoEscolhido = seletor ? ` Tamanho: *${seletor.value}*.` : "";
