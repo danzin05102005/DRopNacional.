@@ -73,29 +73,37 @@
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
         @keyframes zoomIn { from {transform: scale(0.8)} to {transform: scale(1)} }
 
-        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP (CORRIGIDO) --- */
         .btn-whatsapp-float {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
             background-color: #25D366;
             color: white;
-            padding: 12px 24px;
-            border-radius: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
-            gap: 10px;
+            justify-content: center;
             text-decoration: none;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-            z-index: 2000; /* Alto para ficar acima de tudo */
-            transition: transform 0.3s ease, background-color 0.3s;
-            font-size: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            z-index: 2000;
+            transition: all 0.3s ease;
+            padding: 0; /* Garante que não deforme */
+            line-height: 0; /* Remove espaços extras */
+        }
+
+        .btn-whatsapp-float svg {
+            width: 35px;
+            height: 35px;
+            fill: white;
         }
 
         .btn-whatsapp-float:hover {
-            transform: scale(1.05);
             background-color: #20bd5a;
+            transform: scale(1.1);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.5);
         }
 
         footer { text-align: center; padding: 20px; background: rgba(0,0,0,0.5); color: #fff; margin-top: 40px; position: relative; z-index: 10; }
@@ -129,7 +137,6 @@
             </div>
             <div class="menu-items">
                 <a href="https://rastreamento.correios.com.br/app/index.php" target="_blank" class="btn-rastreio">Rastrear Pedido</a>
-                
                 <button id="btn-tema" class="btn-theme" title="Modo Ano Novo">🥂</button>
             </div>
         </div>
@@ -146,14 +153,14 @@
         </div>
     </div>
 
-    <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda%20com%20um%20pedido." 
+    <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda." 
        class="btn-whatsapp-float" 
-       target="_blank">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382C17.283 14.288 16.353 13.829 16.18 13.735C16.007 13.641 15.881 13.593 15.755 13.782C15.629 13.971 15.269 14.394 15.158 14.52C15.048 14.646 14.938 14.662 14.749 14.568C14.56 14.474 13.951 14.274 13.228 13.629C12.648 13.112 12.256 12.473 12.146 12.284C12.036 12.095 12.134 11.993 12.228 11.9C12.313 11.815 12.417 11.679 12.511 11.569C12.605 11.459 12.637 11.38 12.699 11.254C12.762 11.128 12.73 11.018 12.683 10.924C12.636 10.83 12.258 9.899 12.1 9.521C11.947 9.155 11.791 9.205 11.674 9.205C11.565 9.205 11.439 9.205 11.313 9.205C11.187 9.205 10.983 9.252 10.81 9.441C10.637 9.63 10.149 10.086 10.149 11.015C10.149 11.944 10.825 12.841 10.92 12.967C11.014 13.093 12.235 15.071 14.186 15.826C15.845 16.469 16.186 16.355 16.548 16.323C16.963 16.287 17.828 15.826 18.006 15.322C18.185 14.819 18.185 14.394 18.138 14.315C18.091 14.236 17.965 14.19 17.776 14.096H17.472V14.382Z" fill="white"/>
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M12.008 0C5.385 0 0 5.385 0 12.008C0 14.116 0.547 16.164 1.587 17.969L0.518 21.895L4.545 20.839C6.264 21.777 8.169 22.25 10.126 22.25H10.134C16.749 22.25 22.134 16.865 22.134 10.242C22.134 7.031 20.884 4.015 18.614 1.743C16.344 -0.529 13.328 0 10.126 0H12.008ZM12.008 20.378C10.222 20.378 8.475 19.897 6.947 18.989L6.584 18.774L2.835 19.757L3.835 16.103L3.599 15.729C2.607 14.153 2.084 12.332 2.084 10.468C2.084 4.991 6.541 0.534 12.018 0.534C14.671 0.534 17.165 1.568 19.041 3.444C20.917 5.32 21.951 7.814 21.951 10.468C21.951 15.945 17.494 20.378 12.008 20.378Z" fill="white"/>
+       target="_blank"
+       title="Fale conosco no WhatsApp">
+        
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.25 13.3 16.41 13.66 16.52C14.33 16.73 14.94 16.7 15.43 16.63C15.98 16.55 17.11 15.95 17.35 15.27C17.58 14.6 17.58 14.02 17.51 13.9C17.44 13.78 17.27 13.7 17 13.56C16.74 13.43 15.44 12.79 15.2 12.71C14.96 12.63 14.78 12.59 14.61 12.84C14.43 13.1 13.93 13.69 13.78 13.88C13.62 14.06 13.46 14.09 13.2 13.95C12.94 13.81 12.09 13.53 11.09 12.64C10.29 11.93 9.75 11.05 9.6 10.8C9.44 10.54 9.58 10.4 9.71 10.27C9.83 10.15 9.98 9.97 10.12 9.81C10.25 9.64 10.3 9.53 10.4 9.33C10.49 9.13 10.44 8.97 10.38 8.84C10.31 8.71 9.81 7.5 9.61 7C9.4 6.53 9.19 6.59 9.03 6.59C8.88 6.59 8.71 6.59 8.53 6.59V7.33Z"/>
         </svg>
-        Suporte
     </a>
 
     <footer>
@@ -173,7 +180,6 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        // --- ATENÇÃO: COLOQUE SEU NÚMERO AQUI TAMBÉM ---
         const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
@@ -252,7 +258,6 @@
             });
         });
 
-        // Botão de Pedido (Card do produto)
         window.pedirZap = (id, nome, preco) => {
             const seletor = document.getElementById(`tamanho-${id}`);
             let tamanhoEscolhido = seletor ? ` Tamanho: *${seletor.value}*.` : "";
