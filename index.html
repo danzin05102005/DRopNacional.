@@ -3,48 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DropNacional - Ofertas</title>
+    <title>DropNacional - Edição de Natal</title>
     <style>
         /* --- 1. VARIÁVEIS DE CORES --- */
         :root {
-            /* Tema Padrão (Claro) */
+            /* TEMA PADRÃO (Clean) */
             --bg-body: #ffffff;
             --bg-header: #ffffff;
             --bg-card: #ffffff;
             --text-main: #333333;
-            --text-secondary: #666666;
+            --text-card: #333333; /* Cor do texto dentro do cartão */
             --border-color: #eeeeee;
             --primary: #2ecc71;
             --hero-bg: #333333;
             --hero-text: #ffffff;
             --shadow: 0 5px 15px rgba(0,0,0,0.1);
+            --snow-display: none; /* Sem neve no padrão */
         }
 
-        /* Tema Moderno (Dark) */
-        body.tema-moderno {
-            --bg-body: #121212;
-            --bg-header: #1e1e1e;
-            --bg-card: #1e1e1e;
-            --text-main: #e0e0e0;
-            --text-secondary: #aaaaaa;
-            --border-color: #333333;
-            --primary: #00e676;
-            --hero-bg: linear-gradient(135deg, #000000, #2c3e50);
-            --hero-text: #00e676;
-            --shadow: 0 5px 20px rgba(0, 230, 118, 0.15);
+        /* TEMA NATALINO (Ativado pelo botão) */
+        body.tema-natal {
+            --bg-body: #8e0000; /* Vermelho Natal */
+            --bg-header: #680000; /* Vermelho Escuro */
+            --bg-card: #ffffff; /* Cartões brancos para destacar */
+            --text-main: #ffffff; /* Texto do site branco */
+            --text-card: #333333; /* Texto do cartão preto */
+            --border-color: #a81818;
+            --primary: #FFD700; /* DOURADO para botões */
+            --hero-bg: linear-gradient(135deg, #0f2027, #203a43, #2c5364); /* Céu noturno */
+            --hero-text: #FFD700;
+            --shadow: 0 10px 25px rgba(0,0,0,0.3);
+            --snow-display: block; /* Liga a neve */
         }
 
         /* --- 2. CSS GERAL --- */
         body { 
             font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; 
             background: var(--bg-body); color: var(--text-main); 
-            transition: background 0.3s ease, color 0.3s ease;
+            transition: background 0.5s ease, color 0.5s ease;
+            overflow-x: hidden; /* Evita barra lateral por causa da neve */
         }
         
         header { 
             background: var(--bg-header); padding: 15px 0; 
             border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; 
-            transition: background 0.3s ease, border-color 0.3s ease;
+            transition: background 0.5s ease;
         }
 
         .container { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
@@ -56,82 +59,137 @@
             background: var(--primary); color: #fff; padding: 8px 15px; 
             text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; 
             transition: transform 0.2s;
+            /* Se for natal (dourado), texto fica escuro para ler melhor, senão branco */
+            color: var(--bg-header) !important; 
         }
         .btn-zap-menu:hover { transform: scale(1.05); }
 
-        /* Animação Botão Tema */
+        /* Botão Tema (Papai Noel) */
         .btn-theme {
-            background: transparent; border: 1px solid var(--border-color); color: var(--text-main);
-            width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.2rem;
+            background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: var(--text-main);
+            width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .btn-theme:hover { background: var(--border-color); transform: scale(1.1); }
-        .btn-theme:active { transform: scale(0.9); }
+        .btn-theme:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
         .girar { transform: rotate(360deg) scale(1.1); }
 
         .hero { 
             background: var(--hero-bg); color: var(--hero-text); text-align: center; 
-            padding: 60px 20px; transition: background 0.3s ease;
+            padding: 60px 20px; transition: background 0.5s ease;
+            position: relative; overflow: hidden;
         }
         .hero h1 { margin: 0 0 10px; }
-        .hero p { color: #fff; opacity: 0.8; }
+        .hero p { color: #fff; opacity: 0.9; }
 
-        .products { padding: 40px 0; }
+        /* Produtos */
+        .products { padding: 40px 0; position: relative; z-index: 10; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: auto; }
         
         .card { 
             background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; 
             overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; 
         }
-        .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
+        .card:hover { box-shadow: var(--shadow); transform: translateY(-5px); }
 
         .card img { 
             width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; background: #fff;
         }
         
         .info { padding: 15px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .info h3 { color: var(--text-main); margin: 10px 0; font-size: 1.1rem; }
-        .price { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
         
-        .btn-buy { display: block; background: var(--primary); color: #fff; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; }
+        /* Ajuste importante: Cor do texto dentro do card */
+        .info h3 { color: var(--text-card); margin: 10px 0; font-size: 1.1rem; }
+        
+        .price { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin: 10px 0; text-shadow: 0 1px 1px rgba(0,0,0,0.1); }
+        
+        .btn-buy { 
+            display: block; background: var(--primary); 
+            color: var(--bg-header); /* Contraste inteligente */
+            padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; 
+        }
         .btn-buy:hover { opacity: 0.9; }
 
-        footer { text-align: center; padding: 20px; background: #111; color: #fff; margin-top: 40px; }
+        footer { text-align: center; padding: 20px; background: #111; color: #fff; margin-top: 40px; position: relative; z-index: 10; }
+
+        /* --- EFEITO DE NEVE (CSS PURO) --- */
+        .snowflake {
+            display: var(--snow-display);
+            color: #fff;
+            font-size: 1em;
+            font-family: Arial, sans-serif;
+            text-shadow: 0 0 5px #000;
+            position: fixed;
+            top: -10%;
+            z-index: 9999;
+            user-select: none;
+            cursor: default;
+            animation-name: snowflakes-fall, snowflakes-shake;
+            animation-duration: 10s, 3s;
+            animation-timing-function: linear, ease-in-out;
+            animation-iteration-count: infinite, infinite;
+            animation-play-state: running, running;
+        }
+        
+        @keyframes snowflakes-fall {
+            0% { top: -10%; }
+            100% { top: 100%; }
+        }
+        @keyframes snowflakes-shake {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(80px); }
+        }
+
+        /* Posições aleatórias para a neve */
+        .snowflake:nth-of-type(1) { left: 1%; animation-delay: 0s, 0s; }
+        .snowflake:nth-of-type(2) { left: 10%; animation-delay: 1s, 1s; }
+        .snowflake:nth-of-type(3) { left: 20%; animation-delay: 6s, .5s; }
+        .snowflake:nth-of-type(4) { left: 30%; animation-delay: 4s, 2s; }
+        .snowflake:nth-of-type(5) { left: 40%; animation-delay: 2s, 2s; }
+        .snowflake:nth-of-type(6) { left: 50%; animation-delay: 8s, 3s; }
+        .snowflake:nth-of-type(7) { left: 60%; animation-delay: 6s, 2s; }
+        .snowflake:nth-of-type(8) { left: 70%; animation-delay: 2.5s, 1s; }
+        .snowflake:nth-of-type(9) { left: 80%; animation-delay: 1s, 0s; }
+        .snowflake:nth-of-type(10) { left: 90%; animation-delay: 3s, 1.5s; }
+        
     </style>
 </head>
 <body>
+
+    <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
+    <div class="snowflake">❆</div><div class="snowflake">❅</div><div class="snowflake">❆</div>
+    <div class="snowflake">❅</div><div class="snowflake">❆</div><div class="snowflake">❅</div>
+    <div class="snowflake">❆</div>
 
     <header>
         <div class="container">
             <div class="logo">Drop<span>Nacional</span></div>
             <div class="menu-items">
-                <button id="btn-tema" class="btn-theme" title="Mudar Tema">🌙</button>
+                <button id="btn-tema" class="btn-theme" title="Modo Natal">🎅</button>
                 <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
             </div>
         </div>
     </header>
 
     <div class="hero">
-        <h1>Produtos a Pronta Entrega</h1>
-        <p>Estoque no Brasil. Aceitamos Pix.</p>
+        <h1>Ofertas de Natal</h1>
+        <p>Presentes a Pronta Entrega. Garanta já o seu!</p>
     </div>
 
     <div class="products">
         <div class="grid" id="lista-produtos">
-            <p style="text-align:center; width:100%">Carregando catálogo...</p>
+            <p style="text-align:center; width:100%">Carregando presentes...</p>
         </div>
     </div>
 
     <footer>
-        <p>&copy; 2024 DropNacional</p>
+        <p>&copy; 2024 DropNacional. Feliz Natal! 🎄</p>
     </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // CHAVES DO FIREBASE
         const firebaseConfig = {
             apiKey: "AIzaSyDSp-Ho5AFA9aMdBoeAtVxHMHZw6fm7nnw",
             authDomain: "drop-64117.firebaseapp.com",
@@ -143,38 +201,30 @@
 
         const MEU_ZAP = "5511999999999"; 
         
-        // --- 1. LÓGICA DO TEMA COM MEMÓRIA ---
+        // --- LÓGICA DO TEMA NATALINO ---
         const btnTema = document.getElementById('btn-tema');
 
-        // Função para aplicar o tema visualmente
-        function aplicarTema(escuro) {
-            if (escuro) {
-                document.body.classList.add('tema-moderno');
-                btnTema.innerText = '☀️';
+        function aplicarTema(natal) {
+            if (natal) {
+                document.body.classList.add('tema-natal');
+                btnTema.innerText = '🎄'; // Vira árvore quando ativo
             } else {
-                document.body.classList.remove('tema-moderno');
-                btnTema.innerText = '🌙';
+                document.body.classList.remove('tema-natal');
+                btnTema.innerText = '🎅'; // Vira Noel quando desativado
             }
         }
 
-        // Verifica se já tem tema salvo no navegador ao carregar
-        const temaSalvo = localStorage.getItem('temaPreferido');
-        if (temaSalvo === 'escuro') {
-            aplicarTema(true);
-        }
+        // Memória
+        const temaSalvo = localStorage.getItem('temaNatal');
+        if (temaSalvo === 'sim') aplicarTema(true);
 
-        // Clique do botão
         btnTema.addEventListener('click', () => {
             btnTema.classList.add('girar');
+            const isNatal = document.body.classList.toggle('tema-natal');
+            localStorage.setItem('temaNatal', isNatal ? 'sim' : 'nao');
             
-            // Alterna a classe
-            const isDark = document.body.classList.toggle('tema-moderno');
-            
-            // Salva na memória do navegador
-            localStorage.setItem('temaPreferido', isDark ? 'escuro' : 'claro');
-
             setTimeout(() => {
-                btnTema.innerText = isDark ? '☀️' : '🌙';
+                btnTema.innerText = isNatal ? '🎄' : '🎅';
                 btnTema.classList.remove('girar');
             }, 200);
         });
@@ -194,7 +244,7 @@
             }
             snapshot.forEach(doc => {
                 const prod = doc.data();
-                const msg = `Olá, vi o *${prod.nome}* por R$ ${prod.preco} e quero comprar com Pix!`;
+                const msg = `Olá, vi o *${prod.nome}* na Promoção de Natal por R$ ${prod.preco} e quero comprar!`;
                 const link = `https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`;
                 const img = prod.imagem || 'https://via.placeholder.com/300';
 
