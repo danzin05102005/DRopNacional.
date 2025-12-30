@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DropNacional - Ofertas</title>
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%232ecc71'/%3E%3Ctext x='50' y='70' font-family='Arial, sans-serif' font-size='50' font-weight='bold' fill='white' text-anchor='middle'%3EDN%3C/text%3E%3C/svg%3E">
+
     <style>
         /* --- 1. VARIÁVEIS DE CORES --- */
         :root {
@@ -11,7 +14,7 @@
             --text-main: #333333; --text-secondary: #666666; --text-card: #333333;
             --border-color: #e0e0e0; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
             --shadow: 0 5px 15px rgba(0,0,0,0.1); --animacao-display: none; 
-            --btn-theme-bg: #f0f0f0; /* Fundo do botão de tema visível */
+            --btn-theme-bg: #f0f0f0; 
         }
         
         /* TEMA ANO NOVO */
@@ -41,10 +44,10 @@
         .btn-rastreio { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--text-main); text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
         .btn-rastreio:hover { border-bottom: 2px solid var(--primary); }
 
-        /* ESTILO DO BOTÃO DE TEMA CORRIGIDO (Mais visível) */
+        /* ESTILO DO BOTÃO DE TEMA */
         .btn-theme { 
             background: var(--btn-theme-bg); 
-            border: 2px solid var(--border-color); /* Borda mais grossa */
+            border: 2px solid var(--border-color); 
             color: var(--text-main); 
             width: 45px; 
             height: 45px; 
@@ -167,7 +170,7 @@
         </div>
     </div>
 
-    <a href="https://wa.me/5512992289185?text=Olá!%20Preciso%20de%20ajuda." 
+    <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda." 
        class="btn-whatsapp-float" 
        target="_blank"
        title="Fale conosco no WhatsApp">
@@ -193,7 +196,7 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        const MEU_ZAP = "5512992289185"; 
+        const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
         
