@@ -3,150 +3,87 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DropNacional - Bem-vindo</title>
+    <title>DropNacional - Ofertas</title>
     <style>
         /* --- 1. VARIÁVEIS DE CORES --- */
         :root {
-            /* TEMA PADRÃO (Clean) */
-            --bg-body: #ffffff;
-            --bg-header: #ffffff;
-            --bg-card: #ffffff;
-            --text-main: #333333;
-            --text-secondary: #666666; 
-            --text-card: #333333;
-            --border-color: #eeeeee;
-            --primary: #2ecc71;
-            --hero-bg: #333333;
-            --hero-text: #ffffff;
-            --shadow: 0 5px 15px rgba(0,0,0,0.1);
-            --animacao-display: none; 
+            --bg-body: #ffffff; --bg-header: #ffffff; --bg-card: #ffffff;
+            --text-main: #333333; --text-secondary: #666666; --text-card: #333333;
+            --border-color: #eeeeee; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1); --animacao-display: none; 
         }
 
-        /* TEMA ANO NOVO (Ativado pelo botão) */
+        /* TEMA ANO NOVO */
         body.tema-anonovo {
             --bg-body: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            --bg-header: rgba(15, 12, 41, 0.9);
-            --bg-card: #ffffff; 
-            --text-main: #ffffff; 
-            --text-secondary: #cccccc; 
-            --text-card: #333333; 
-            --border-color: #FFD700; 
-            --primary: #FFD700; 
-            --hero-bg: transparent;
-            --hero-text: #FFD700; 
-            --shadow: 0 10px 25px rgba(255, 215, 0, 0.3); 
-            --animacao-display: block; 
+            --bg-header: rgba(15, 12, 41, 0.9); --bg-card: #ffffff; 
+            --text-main: #ffffff; --text-secondary: #cccccc; --text-card: #333333; 
+            --border-color: #FFD700; --primary: #FFD700; --hero-bg: transparent; --hero-text: #FFD700; 
+            --shadow: 0 10px 25px rgba(255, 215, 0, 0.3); --animacao-display: block; 
         }
 
         /* --- 2. CSS GERAL --- */
-        body { 
-            font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; 
-            background: var(--bg-body); color: var(--text-main); 
-            transition: background 0.5s ease, color 0.5s ease;
-            min-height: 100vh; overflow-x: hidden;
-        }
-
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-body); color: var(--text-main); transition: background 0.5s ease, color 0.5s ease; min-height: 100vh; overflow-x: hidden; }
+        
         /* BARRA DE BOAS VINDAS */
-        .welcome-bar {
-            background-color: var(--primary);
-            color: #fff;
-            text-align: center;
-            padding: 8px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            transition: 0.3s;
-        }
-        /* Ajuste de cor no Ano Novo para dar leitura no dourado */
+        .welcome-bar { background-color: var(--primary); color: #fff; text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; transition: 0.3s; }
         body.tema-anonovo .welcome-bar { color: #333; }
         
-        header { 
-            background: var(--bg-header); padding: 15px 0; 
-            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; 
-            transition: background 0.5s ease, border-color 0.5s ease;
-            backdrop-filter: blur(10px);
-        }
-
+        header { background: var(--bg-header); padding: 15px 0; border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100; transition: background 0.5s ease, border-color 0.5s ease; backdrop-filter: blur(10px); }
         .container { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-        
-        /* LOGO E SLOGAN */
         .logo-area { display: flex; flex-direction: column; }
         .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-main); line-height: 1; }
         .logo span { color: var(--primary); }
         .slogan { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px; margin-top: 3px; font-style: italic; }
-
         .menu-items { display: flex; align-items: center; gap: 15px; }
 
-        .btn-zap-menu { 
-            background: var(--primary); color: #fff; padding: 8px 15px; 
-            text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; 
-            transition: transform 0.2s; color: #fff;
-        }
+        .btn-zap-menu { background: var(--primary); color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; transition: transform 0.2s; color: #fff; }
         body.tema-anonovo .btn-zap-menu { color: #333 !important; }
         .btn-zap-menu:hover { transform: scale(1.05); }
 
-        .btn-theme {
-            background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: var(--text-main);
-            width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem;
-            display: flex; align-items: center; justify-content: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
+        .btn-theme { background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: var(--text-main); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.4s; }
         .btn-theme:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
         .girar { transform: rotate(360deg) scale(1.1); }
 
-        .hero { 
-            background: var(--hero-bg); color: var(--hero-text); text-align: center; 
-            padding: 60px 20px; transition: background 0.5s ease; position: relative; z-index: 10;
-        }
+        .hero { background: var(--hero-bg); color: var(--hero-text); text-align: center; padding: 60px 20px; transition: background 0.5s ease; position: relative; z-index: 10; }
         .hero h1 { margin: 0 0 10px; font-size: 2.5rem; }
         .hero p { color: inherit; opacity: 0.9; font-size: 1.2rem; }
 
         .products { padding: 40px 0; position: relative; z-index: 10; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: auto; }
         
-        .card { 
-            background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; 
-            overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; 
-        }
+        .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { box-shadow: var(--shadow); transform: translateY(-5px); }
-
-        .card img { 
-            width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; background: #fff;
-        }
+        .card img { width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; background: #fff; }
         
         .info { padding: 15px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .info h3 { color: var(--text-card); margin: 10px 0; font-size: 1.1rem; }
         .price { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
         
-        .btn-buy { 
-            display: block; background: var(--primary); color: #fff;
-            padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; 
+        /* ESTILO DO SELETOR DE TAMANHO */
+        .size-selector {
+            margin: 10px 0;
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 1rem;
+            color: #333;
+            background: #fff;
         }
+
+        .btn-buy { display: block; background: var(--primary); color: #fff; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; cursor: pointer; }
         body.tema-anonovo .btn-buy { color: #333; }
         .btn-buy:hover { opacity: 0.9; }
 
         footer { text-align: center; padding: 20px; background: rgba(0,0,0,0.5); color: #fff; margin-top: 40px; position: relative; z-index: 10; }
 
         /* BORBULHAS */
-        .sparkle {
-            position: fixed; width: 6px; height: 6px; border-radius: 50%;
-            background-color: #FFD700; box-shadow: 0 0 10px 2px #FFD700;
-            top: 100%; z-index: 1; opacity: 0; animation: subir 5s linear infinite;
-            display: var(--animacao-display);
-        }
-        @keyframes subir {
-            0% { transform: translateY(0) scale(0.5); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(-110vh) scale(1.5); opacity: 0; }
-        }
-        .s1 { left: 10%; animation-duration: 4s; animation-delay: 0s; }
-        .s2 { left: 25%; animation-duration: 5s; animation-delay: 1s; }
-        .s3 { left: 40%; animation-duration: 3.5s; animation-delay: 2s; }
-        .s4 { left: 55%; animation-duration: 6s; animation-delay: 0.5s; }
-        .s5 { left: 70%; animation-duration: 4.5s; animation-delay: 1.5s; }
-        .s6 { left: 85%; animation-duration: 5.5s; animation-delay: 3s; }
-        .s7 { left: 5%; animation-duration: 7s; animation-delay: 2.5s; }
-        .s8 { left: 95%; animation-duration: 4s; animation-delay: 4s; }
+        .sparkle { position: fixed; width: 6px; height: 6px; border-radius: 50%; background-color: #FFD700; box-shadow: 0 0 10px 2px #FFD700; top: 100%; z-index: 1; opacity: 0; animation: subir 5s linear infinite; display: var(--animacao-display); }
+        @keyframes subir { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
+        .s1 { left: 10%; animation-duration: 4s; animation-delay: 0s; } .s2 { left: 25%; animation-duration: 5s; animation-delay: 1s; } .s3 { left: 40%; animation-duration: 3.5s; animation-delay: 2s; }
+        .s4 { left: 55%; animation-duration: 6s; animation-delay: 0.5s; } .s5 { left: 70%; animation-duration: 4.5s; animation-delay: 1.5s; } .s6 { left: 85%; animation-duration: 5.5s; animation-delay: 3s; }
+        .s7 { left: 5%; animation-duration: 7s; animation-delay: 2.5s; } .s8 { left: 95%; animation-duration: 4s; animation-delay: 4s; }
     </style>
 </head>
 <body>
@@ -155,9 +92,7 @@
     <div class="sparkle s4"></div><div class="sparkle s5"></div><div class="sparkle s6"></div>
     <div class="sparkle s7"></div><div class="sparkle s8"></div>
 
-    <div class="welcome-bar" id="msg-boasvindas">
-        👋 Olá! Seja bem-vindo(a) à maior loja de Dropshipping Nacional.
-    </div>
+    <div class="welcome-bar" id="msg-boasvindas">👋 Olá! Seja bem-vindo(a) à maior loja de Dropshipping Nacional.</div>
 
     <header>
         <div class="container">
@@ -165,7 +100,6 @@
                 <div class="logo">Drop<span>Nacional</span></div>
                 <div class="slogan">O Brasil compra aqui 🇧🇷</div>
             </div>
-
             <div class="menu-items">
                 <button id="btn-tema" class="btn-theme" title="Modo Ano Novo">🥂</button>
                 <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
@@ -201,9 +135,10 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        const MEU_ZAP = "5512992289185"; 
+        const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
+        document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
 
         // ELEMENTOS
         const btnTema = document.getElementById('btn-tema');
@@ -226,7 +161,6 @@
                 welcomeMsg.innerText = "👋 Olá! Seja bem-vindo(a) à maior loja de Dropshipping Nacional.";
             }
         }
-
         const temaSalvo = localStorage.getItem('temaAnoNovo');
         if (temaSalvo === 'sim') aplicarTema(true);
 
@@ -234,43 +168,58 @@
             btnTema.classList.add('girar');
             const isAnoNovo = document.body.classList.toggle('tema-anonovo');
             localStorage.setItem('temaAnoNovo', isAnoNovo ? 'sim' : 'nao');
-            
-            setTimeout(() => {
-                aplicarTema(isAnoNovo);
-                btnTema.classList.remove('girar');
-            }, 200);
+            setTimeout(() => { aplicarTema(isAnoNovo); btnTema.classList.remove('girar'); }, 200);
         });
 
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const divLista = document.getElementById('lista-produtos');
 
-        document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
-
+        // --- RENDERIZAÇÃO DA LISTA ---
         onSnapshot(collection(db, "produtos"), (snapshot) => {
             divLista.innerHTML = '';
-            if (snapshot.empty) {
-                divLista.innerHTML = '<p>Nenhum produto cadastrado.</p>';
-                return;
-            }
+            if (snapshot.empty) { divLista.innerHTML = '<p>Nenhum produto cadastrado.</p>'; return; }
+            
             snapshot.forEach(doc => {
                 const prod = doc.data();
-                const msg = `Olá! Vi o *${prod.nome}* na promoção de Ano Novo por R$ ${prod.preco}. Ainda tem?`;
-                const link = `https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`;
+                const id = doc.id;
                 const img = prod.imagem || 'https://via.placeholder.com/300';
+                
+                // Lógica de Tamanho
+                let seletorHTML = '';
+                if (prod.tamanhos && prod.tamanhos.length > 0) {
+                    let opcoes = prod.tamanhos.map(t => `<option value="${t}">${t}</option>`).join('');
+                    seletorHTML = `<select id="tamanho-${id}" class="size-selector">${opcoes}</select>`;
+                }
 
                 divLista.innerHTML += `
                     <div class="card">
                         <img src="${img}" alt="${prod.nome}">
                         <div class="info">
                             <h3>${prod.nome}</h3>
-                            <div class="price">R$ ${prod.preco}</div>
-                            <a href="${link}" target="_blank" class="btn-buy">Pedir no WhatsApp</a>
+                            ${seletorHTML}
+                            <div class="price">R$ ${parseFloat(prod.preco).toFixed(2)}</div>
+                            <div class="btn-buy" onclick="pedirZap('${id}', '${prod.nome}', '${prod.preco}')">Pedir no WhatsApp</div>
                         </div>
                     </div>
                 `;
             });
         });
+
+        // --- FUNÇÃO PARA GERAR O LINK COM O TAMANHO ESCOLHIDO ---
+        window.pedirZap = (id, nome, preco) => {
+            const seletor = document.getElementById(`tamanho-${id}`);
+            let tamanhoEscolhido = "";
+            
+            if (seletor) {
+                tamanhoEscolhido = ` Tamanho: *${seletor.value}*.`;
+            }
+            
+            const msg = `Olá! Quero comprar o *${nome}* por R$ ${preco}.${tamanhoEscolhido} Aceita Pix?`;
+            const link = `https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`;
+            
+            window.open(link, '_blank');
+        }
     </script>
 </body>
 </html>
