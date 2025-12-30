@@ -122,7 +122,7 @@
                 <div class="slogan">O Brasil compra aqui 🇧🇷</div>
             </div>
             <div class="menu-items">
-                <a onclick="rastrearPedido()" class="btn-rastreio">Rastrear Pedido</a>
+                <a href="https://rastreamento.correios.com.br/app/index.php" target="_blank" class="btn-rastreio">Rastrear Pedido</a>
                 
                 <button id="btn-tema" class="btn-theme" title="Modo Ano Novo">🥂</button>
                 <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
@@ -154,7 +154,7 @@
         <div class="faq-item">
             <button class="faq-question">Tem código de rastreio?</button>
             <div class="faq-answer">
-                <p>Sim! Todos os pedidos possuem código de rastreamento. Você pode usar a opção "Rastrear Pedido" no menu acima para localizar sua encomenda.</p>
+                <p>Sim! Todos os pedidos possuem código de rastreamento. Você pode usar a opção "Rastrear Pedido" no menu acima para ir direto ao site dos Correios.</p>
             </div>
         </div>
 
@@ -190,19 +190,12 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        const MEU_ZAP = "5511999999999"; 
+        const MEU_ZAP = "5512992289185"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
         document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
 
-        // --- FUNÇÃO DE RASTREIO ---
-        window.rastrearPedido = () => {
-            const codigo = prompt("Digite seu código de rastreio (Ex: AB123456789BR):");
-            if(codigo) {
-                // Abre o site LinkCorreios que é muito bom para dropshipping
-                window.open(`https://www.linkcorreios.com.br/${codigo}`, '_blank');
-            }
-        }
+        // (Removi a função window.rastrearPedido pois o botão agora é um link direto href)
 
         // --- LÓGICA DO FAQ ---
         const acc = document.getElementsByClassName("faq-question");
