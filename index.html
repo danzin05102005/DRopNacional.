@@ -5,39 +5,155 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DropNacional - Ofertas</title>
     <style>
-        /* DESIGN CLÁSSICO (VERDE E LIMPO) */
-        body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+        /* --- 1. VARIÁVEIS DE CORES (O SEGREDO DO TEMA) --- */
+        :root {
+            /* Tema Padrão (Claro) */
+            --bg-body: #ffffff;
+            --bg-header: #ffffff;
+            --bg-card: #ffffff;
+            --text-main: #333333;
+            --text-secondary: #666666;
+            --border-color: #eeeeee;
+            --primary: #2ecc71; /* Verde Clássico */
+            --hero-bg: #333333;
+            --hero-text: #ffffff;
+            --shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Tema Moderno (Dark/Neon) */
+        body.tema-moderno {
+            --bg-body: #121212;
+            --bg-header: #1e1e1e;
+            --bg-card: #1e1e1e;
+            --text-main: #e0e0e0;
+            --text-secondary: #aaaaaa;
+            --border-color: #333333;
+            --primary: #00e676; /* Verde Neon */
+            --hero-bg: linear-gradient(135deg, #000000, #2c3e50);
+            --hero-text: #00e676;
+            --shadow: 0 5px 20px rgba(0, 230, 118, 0.15);
+        }
+
+        /* --- 2. CSS GERAL --- */
+        body { 
+            font-family: 'Segoe UI', sans-serif; 
+            margin: 0; 
+            padding: 0; 
+            background: var(--bg-body); 
+            color: var(--text-main); 
+            transition: background 0.3s ease, color 0.3s ease;
+        }
         
-        /* Cabeçalho */
-        header { background: #fff; padding: 15px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
-        .container { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: bold; color: #333; }
-        .logo span { color: #2ecc71; } /* Verde */
+        header { 
+            background: var(--bg-header); 
+            padding: 15px 0; 
+            border-bottom: 1px solid var(--border-color); 
+            position: sticky; 
+            top: 0; 
+            z-index: 100; 
+            transition: background 0.3s ease, border-color 0.3s ease;
+        }
+
+        .container { 
+            width: 90%; 
+            max-width: 1100px; 
+            margin: auto; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         
-        /* Botão Zap no Menu */
-        .btn-zap-menu { background: #25D366; color: white; padding: 8px 15px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--text-main); }
+        .logo span { color: var(--primary); }
+        
+        .menu-items { display: flex; align-items: center; gap: 15px; }
+
+        .btn-zap-menu { 
+            background: var(--primary); 
+            color: #fff; 
+            padding: 8px 15px; 
+            text-decoration: none; 
+            border-radius: 20px; 
+            font-weight: bold; 
+            font-size: 0.9rem; 
+            transition: transform 0.2s;
+        }
+        .btn-zap-menu:hover { transform: scale(1.05); }
+
+        /* --- ANIMAÇÃO DO BOTÃO DE TEMA --- */
+        .btn-theme {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%; /* Redondo */
+            cursor: pointer;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efeito elástico */
+        }
+
+        .btn-theme:hover { 
+            background: var(--border-color); 
+            transform: scale(1.1); /* Cresce um pouco */
+        }
+
+        .btn-theme:active {
+            transform: scale(0.9); /* Encolhe ao clicar */
+        }
+
+        /* Classe para girar o ícone quando troca */
+        .girar {
+            transform: rotate(360deg) scale(1.1);
+        }
 
         /* Banner */
-        .hero { background: #333; color: white; text-align: center; padding: 60px 20px; }
+        .hero { 
+            background: var(--hero-bg); 
+            color: var(--hero-text); 
+            text-align: center; 
+            padding: 60px 20px; 
+            transition: background 0.3s ease;
+        }
         .hero h1 { margin: 0 0 10px; }
+        .hero p { color: #fff; opacity: 0.8; }
 
         /* Produtos */
         .products { padding: 40px 0; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: auto; }
         
-        .card { border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
-        .card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); transform: translateY(-3px); }
+        .card { 
+            background: var(--bg-card);
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            display: flex; 
+            flex-direction: column; 
+            transition: 0.3s; 
+        }
+        .card:hover { box-shadow: var(--shadow); transform: translateY(-3px); }
 
-        /* CORREÇÃO DA FOTO */
-        .card img { width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; }
+        .card img { 
+            width: 100%; 
+            height: 250px; 
+            object-fit: contain; 
+            padding: 10px; 
+            box-sizing: border-box; 
+            background: #fff; /* Fundo branco fixo para fotos PNG */
+        }
         
         .info { padding: 15px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
-        .price { color: #2ecc71; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
+        .info h3 { color: var(--text-main); margin: 10px 0; font-size: 1.1rem; }
         
-        .btn-buy { display: block; background: #25D366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
-        .btn-buy:hover { background: #128C7E; }
+        .price { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
+        
+        .btn-buy { display: block; background: var(--primary); color: #fff; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; }
+        .btn-buy:hover { opacity: 0.9; }
 
-        footer { text-align: center; padding: 20px; background: #333; color: #fff; margin-top: 40px; }
+        footer { text-align: center; padding: 20px; background: #111; color: #fff; margin-top: 40px; }
     </style>
 </head>
 <body>
@@ -45,7 +161,12 @@
     <header>
         <div class="container">
             <div class="logo">Drop<span>Nacional</span></div>
-            <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
+            
+            <div class="menu-items">
+                <button id="btn-tema" class="btn-theme" title="Mudar Tema">🌙</button>
+                
+                <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
+            </div>
         </div>
     </header>
 
@@ -68,35 +189,48 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
 
-        // -----------------------------------------------------------
-        // 1. COLE SUA CONFIGURAÇÃO DO FIREBASE AQUI DENTRO:
-        // -----------------------------------------------------------
+        // 1. CONFIGURAÇÃO COM SUAS CHAVES REAIS
         const firebaseConfig = {
-            apiKey: "SUA_API_KEY_AQUI",
-            authDomain: "SEU_PROJETO.firebaseapp.com",
-            projectId: "SEU_PROJETO_ID",
-            storageBucket: "SEU_PROJETO.appspot.com",
-            messagingSenderId: "SEU_MESSAGING_ID",
-            appId: "SEU_APP_ID"
+            apiKey: "AIzaSyDSp-Ho5AFA9aMdBoeAtVxHMHZw6fm7nnw",
+            authDomain: "drop-64117.firebaseapp.com",
+            projectId: "drop-64117",
+            storageBucket: "drop-64117.firebasestorage.app",
+            messagingSenderId: "194938296952",
+            appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        // -----------------------------------------------------------
-        // 2. DIGITE SEU NÚMERO DE WHATSAPP AQUI (Com 55 e DDD):
-        // -----------------------------------------------------------
+        // 2. SEU WHATSAPP (Não esqueça de confirmar se está certo)
         const MEU_ZAP = "5511999999999"; 
 
+        // Lógica do Tema
+        const btnTema = document.getElementById('btn-tema');
+        btnTema.addEventListener('click', () => {
+            // Adiciona classe de animação
+            btnTema.classList.add('girar');
+            
+            // Troca o tema
+            document.body.classList.toggle('tema-moderno');
+            
+            // Troca ícone e remove animação após completar
+            setTimeout(() => {
+                if (document.body.classList.contains('tema-moderno')) {
+                    btnTema.innerText = '☀️';
+                } else {
+                    btnTema.innerText = '🌙';
+                }
+                btnTema.classList.remove('girar');
+            }, 200); // Tempo curto para a troca ser rápida
+        });
 
-        // INICIALIZAÇÃO (NÃO MEXER)
+        // Lógica do Firebase
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
         const divLista = document.getElementById('lista-produtos');
 
-        // Configura botão do topo
         document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
 
-        // Busca produtos em tempo real
         onSnapshot(collection(db, "produtos"), (snapshot) => {
-            divLista.innerHTML = ''; // Limpa
+            divLista.innerHTML = '';
 
             if (snapshot.empty) {
                 divLista.innerHTML = '<p>Nenhum produto cadastrado.</p>';
@@ -105,14 +239,10 @@
 
             snapshot.forEach(doc => {
                 const prod = doc.data();
-                
-                // Cria link do Zap com mensagem pronta
                 const msg = `Olá, vi o *${prod.nome}* por R$ ${prod.preco} e quero comprar com Pix!`;
                 const link = `https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`;
-
                 const img = prod.imagem || 'https://via.placeholder.com/300';
 
-                // Cria o HTML
                 divLista.innerHTML += `
                     <div class="card">
                         <img src="${img}" alt="${prod.nome}">
