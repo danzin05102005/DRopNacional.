@@ -11,19 +11,22 @@
             --text-main: #333333; --text-secondary: #666666; --text-card: #333333;
             --border-color: #eeeeee; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
             --shadow: 0 5px 15px rgba(0,0,0,0.1); --animacao-display: none; 
+            --faq-bg: #f9f9f9; /* Cor de fundo do FAQ fechado */
         }
+        
+        /* TEMA ANO NOVO */
         body.tema-anonovo {
             --bg-body: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             --bg-header: rgba(15, 12, 41, 0.9); --bg-card: #ffffff; 
             --text-main: #ffffff; --text-secondary: #cccccc; --text-card: #333333; 
             --border-color: #FFD700; --primary: #FFD700; --hero-bg: transparent; --hero-text: #FFD700; 
             --shadow: 0 10px 25px rgba(255, 215, 0, 0.3); --animacao-display: block; 
+            --faq-bg: rgba(255,255,255,0.1);
         }
 
         /* --- 2. CSS GERAL --- */
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-body); color: var(--text-main); transition: background 0.5s ease, color 0.5s ease; min-height: 100vh; overflow-x: hidden; }
         
-        /* BARRA DE BOAS VINDAS */
         .welcome-bar { background-color: var(--primary); color: #fff; text-align: center; padding: 8px; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.5px; transition: 0.3s; }
         body.tema-anonovo .welcome-bar { color: #333; }
         
@@ -37,20 +40,22 @@
         .btn-zap-menu { background: var(--primary); color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; transition: transform 0.2s; color: #fff; }
         body.tema-anonovo .btn-zap-menu { color: #333 !important; }
         .btn-zap-menu:hover { transform: scale(1.05); }
+
         .btn-theme { background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: var(--text-main); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.4s; }
         .btn-theme:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
         .girar { transform: rotate(360deg) scale(1.1); }
+
         .hero { background: var(--hero-bg); color: var(--hero-text); text-align: center; padding: 60px 20px; transition: background 0.5s ease; position: relative; z-index: 10; }
         .hero h1 { margin: 0 0 10px; font-size: 2.5rem; }
+
         .products { padding: 40px 0; position: relative; z-index: 10; }
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: auto; }
+        
         .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
         .card:hover { box-shadow: var(--shadow); transform: translateY(-5px); }
-        
-        /* IMAGEM DO CARD (Agora clicável) */
         .card img { width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; background: #fff; cursor: zoom-in; transition: transform 0.3s; }
         .card img:hover { transform: scale(1.03); }
-
+        
         .info { padding: 15px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
         .info h3 { color: var(--text-card); margin: 10px 0; font-size: 1.1rem; }
         .price { color: var(--primary); font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
@@ -58,33 +63,38 @@
         .btn-buy { display: block; background: var(--primary); color: #fff; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; transition: opacity 0.2s; cursor: pointer; }
         body.tema-anonovo .btn-buy { color: #333; }
         .btn-buy:hover { opacity: 0.9; }
+
+        /* --- ESTILOS DO FAQ --- */
+        .faq-section { max-width: 800px; margin: 50px auto; padding: 0 20px; position: relative; z-index: 10; }
+        .faq-section h2 { text-align: center; margin-bottom: 30px; font-size: 2rem; color: var(--primary); }
+        .faq-item { margin-bottom: 10px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); }
+        .faq-question {
+            background: var(--faq-bg); color: var(--text-main); padding: 15px 20px; width: 100%; text-align: left;
+            border: none; outline: none; cursor: pointer; font-size: 1.1rem; font-weight: bold;
+            display: flex; justify-content: space-between; align-items: center; transition: background 0.3s;
+        }
+        .faq-question:hover { background: rgba(0,0,0,0.05); }
+        .faq-question::after { content: '+'; font-size: 1.5rem; color: var(--primary); font-weight: bold; }
+        .faq-item.active .faq-question::after { content: '-'; }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background: var(--bg-card);
+            padding: 0 20px; color: var(--text-secondary);
+        }
+        .faq-item.active .faq-answer { padding: 20px; max-height: 300px; }
+
+        /* MODAL */
+        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.9); align-items: center; justify-content: center; animation: fadeIn 0.3s; }
+        .modal-content { margin: auto; display: block; max-width: 90%; max-height: 90vh; object-fit: contain; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2); animation: zoomIn 0.3s; }
+        .close { position: absolute; top: 20px; right: 35px; color: #f1f1f1; font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer; }
+        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
+        @keyframes zoomIn { from {transform: scale(0.8)} to {transform: scale(1)} }
+
         footer { text-align: center; padding: 20px; background: rgba(0,0,0,0.5); color: #fff; margin-top: 40px; position: relative; z-index: 10; }
         .sparkle { position: fixed; width: 6px; height: 6px; border-radius: 50%; background-color: #FFD700; box-shadow: 0 0 10px 2px #FFD700; top: 100%; z-index: 1; opacity: 0; animation: subir 5s linear infinite; display: var(--animacao-display); }
         @keyframes subir { 0% { transform: translateY(0) scale(0.5); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(-110vh) scale(1.5); opacity: 0; } }
         .s1 { left: 10%; animation-duration: 4s; animation-delay: 0s; } .s2 { left: 25%; animation-duration: 5s; animation-delay: 1s; } .s3 { left: 40%; animation-duration: 3.5s; animation-delay: 2s; }
         .s4 { left: 55%; animation-duration: 6s; animation-delay: 0.5s; } .s5 { left: 70%; animation-duration: 4.5s; animation-delay: 1.5s; } .s6 { left: 85%; animation-duration: 5.5s; animation-delay: 3s; }
         .s7 { left: 5%; animation-duration: 7s; animation-delay: 2.5s; } .s8 { left: 95%; animation-duration: 4s; animation-delay: 4s; }
-
-        /* --- CSS DO MODAL (ZOOM DA IMAGEM) --- */
-        .modal {
-            display: none; /* Escondido por padrão */
-            position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto;
-            background-color: rgba(0,0,0,0.9); /* Fundo preto transparente */
-            align-items: center; justify-content: center;
-            animation: fadeIn 0.3s;
-        }
-        .modal-content {
-            margin: auto; display: block; max-width: 90%; max-height: 90vh;
-            object-fit: contain; border-radius: 8px; box-shadow: 0 0 20px rgba(255,255,255,0.2);
-            animation: zoomIn 0.3s;
-        }
-        .close {
-            position: absolute; top: 20px; right: 35px; color: #f1f1f1;
-            font-size: 40px; font-weight: bold; transition: 0.3s; cursor: pointer;
-        }
-        .close:hover, .close:focus { color: var(--primary); text-decoration: none; cursor: pointer; }
-        @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
-        @keyframes zoomIn { from {transform: scale(0.8)} to {transform: scale(1)} }
     </style>
 </head>
 <body>
@@ -124,6 +134,38 @@
         </div>
     </div>
 
+    <div class="faq-section">
+        <h2>Perguntas Frequentes</h2>
+        
+        <div class="faq-item">
+            <button class="faq-question">Qual o prazo de entrega?</button>
+            <div class="faq-answer">
+                <p>Nossos produtos são enviados em até 24 horas úteis após a confirmação do pagamento. O prazo médio de entrega é de 5 a 12 dias úteis para todo o Brasil.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Tem código de rastreio?</button>
+            <div class="faq-answer">
+                <p>Sim! Todos os pedidos possuem código de rastreamento. Você receberá o código em seu WhatsApp assim que o pedido for despachado pela transportadora.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">Por que a embalagem é diferente?</button>
+            <div class="faq-answer">
+                <p>Para garantir o frete mais rápido e barato do Brasil, utilizamos centros de distribuição parceiros (Logística Reversa e Marketplaces). Por isso, sua caixa pode conter identificação de nossos parceiros logísticos.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <button class="faq-question">É seguro comprar?</button>
+            <div class="faq-answer">
+                <p>Totalmente. Utilizamos pagamento via Pix seguro e garantimos a entrega do seu produto ou seu dinheiro de volta. Você tem garantia de 7 dias após o recebimento.</p>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; <span id="ano-atual"></span> DropNacional. Feliz Ano Novo! ✨</p>
     </footer>
@@ -141,31 +183,30 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        const MEU_ZAP = "5512992289185"; 
+        const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
         document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
 
-        // --- LÓGICA DO MODAL (ZOOM) ---
+        // --- LÓGICA DO FAQ (ACCORDION) ---
+        const acc = document.getElementsByClassName("faq-question");
+        for (let i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function() {
+                // Fecha os outros se quiser (opcional) - aqui deixei abrir vários
+                this.parentElement.classList.toggle("active");
+            });
+        }
+
+        // --- MODAL ZOOM ---
         const modal = document.getElementById("imageModal");
         const modalImg = document.getElementById("imgAmpliada");
         const closeBtn = document.getElementById("closeModal");
 
-        // Função chamada ao clicar na imagem pequena
-        window.abrirZoom = (src) => {
-            modal.style.display = "flex";
-            modalImg.src = src;
-        }
-
-        // Fechar pelo botão X
+        window.abrirZoom = (src) => { modal.style.display = "flex"; modalImg.src = src; }
         closeBtn.onclick = () => { modal.style.display = "none"; }
+        window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
 
-        // Fechar clicando fora da imagem
-        window.onclick = (event) => {
-            if (event.target == modal) { modal.style.display = "none"; }
-        }
-
-        // --- LÓGICA DO TEMA ---
+        // --- TEMA ---
         const btnTema = document.getElementById('btn-tema');
         const heroTitle = document.getElementById('hero-title');
         const heroDesc = document.getElementById('hero-desc');
@@ -215,7 +256,6 @@
                     seletorHTML = `<select id="tamanho-${id}" class="size-selector">${opcoes}</select>`;
                 }
 
-                // MODIFICADO: Adicionado onclick na imagem para abrir o zoom
                 divLista.innerHTML += `
                     <div class="card">
                         <img src="${img}" alt="${prod.nome}" onclick="abrirZoom('${img}')" title="Clique para ampliar">
