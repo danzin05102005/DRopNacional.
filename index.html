@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DropNacional - Ofertas</title>
+    <style>
+        /* DESIGN CLÁSSICO (VERDE E LIMPO) */
+        body { font-family: sans-serif; margin: 0; padding: 0; background: #fff; color: #333; }
+        
+        /* Cabeçalho */
+        header { background: #fff; padding: 15px 0; border-bottom: 1px solid #eee; position: sticky; top: 0; z-index: 100; }
+        .container { width: 90%; max-width: 1100px; margin: auto; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: #333; }
+        .logo span { color: #2ecc71; } /* Verde */
+        
+        /* Botão Zap no Menu */
+        .btn-zap-menu { background: #25D366; color: white; padding: 8px 15px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; }
+
+        /* Banner */
+        .hero { background: #333; color: white; text-align: center; padding: 60px 20px; }
+        .hero h1 { margin: 0 0 10px; }
+
+        /* Produtos */
+        .products { padding: 40px 0; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; width: 90%; max-width: 1100px; margin: auto; }
+        
+        .card { border: 1px solid #eee; border-radius: 8px; overflow: hidden; display: flex; flex-direction: column; transition: 0.3s; }
+        .card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); transform: translateY(-3px); }
+
+        /* CORREÇÃO DA FOTO */
+        .card img { width: 100%; height: 250px; object-fit: contain; padding: 10px; box-sizing: border-box; }
+        
+        .info { padding: 15px; text-align: center; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+        .price { color: #2ecc71; font-weight: bold; font-size: 1.3rem; margin: 10px 0; }
+        
+        .btn-buy { display: block; background: #25D366; color: white; padding: 10px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+        .btn-buy:hover { background: #128C7E; }
+
+        footer { text-align: center; padding: 20px; background: #333; color: #fff; margin-top: 40px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="logo">Drop<span>Nacional</span></div>
+            <a href="#" id="link-topo" class="btn-zap-menu">Fale Conosco</a>
+        </div>
+    </header>
+
+    <div class="hero">
+        <h1>Produtos a Pronta Entrega</h1>
+        <p>Estoque no Brasil. Aceitamos Pix.</p>
+    </div>
+
+    <div class="products">
+        <div class="grid" id="lista-produtos">
+            <p style="text-align:center; width:100%">Carregando catálogo...</p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 DropNacional</p>
+    </footer>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore.js";
+
+        // -----------------------------------------------------------
+        // 1. COLE SUA CONFIGURAÇÃO DO FIREBASE AQUI DENTRO:
+        // -----------------------------------------------------------
+        const firebaseConfig = {
+            apiKey: "SUA_API_KEY_AQUI",
+            authDomain: "SEU_PROJETO.firebaseapp.com",
+            projectId: "SEU_PROJETO_ID",
+            storageBucket: "SEU_PROJETO.appspot.com",
+            messagingSenderId: "SEU_MESSAGING_ID",
+            appId: "SEU_APP_ID"
+        };
+
+        // -----------------------------------------------------------
+        // 2. DIGITE SEU NÚMERO DE WHATSAPP AQUI (Com 55 e DDD):
+        // -----------------------------------------------------------
+        const MEU_ZAP = "5511999999999"; 
+
+
+        // INICIALIZAÇÃO (NÃO MEXER)
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const divLista = document.getElementById('lista-produtos');
+
+        // Configura botão do topo
+        document.getElementById('link-topo').href = `https://wa.me/${MEU_ZAP}`;
+
+        // Busca produtos em tempo real
+        onSnapshot(collection(db, "produtos"), (snapshot) => {
+            divLista.innerHTML = ''; // Limpa
+
+            if (snapshot.empty) {
+                divLista.innerHTML = '<p>Nenhum produto cadastrado.</p>';
+                return;
+            }
+
+            snapshot.forEach(doc => {
+                const prod = doc.data();
+                
+                // Cria link do Zap com mensagem pronta
+                const msg = `Olá, vi o *${prod.nome}* por R$ ${prod.preco} e quero comprar com Pix!`;
+                const link = `https://wa.me/${MEU_ZAP}?text=${encodeURIComponent(msg)}`;
+
+                const img = prod.imagem || 'https://via.placeholder.com/300';
+
+                // Cria o HTML
+                divLista.innerHTML += `
+                    <div class="card">
+                        <img src="${img}" alt="${prod.nome}">
+                        <div class="info">
+                            <h3>${prod.nome}</h3>
+                            <div class="price">R$ ${prod.preco}</div>
+                            <a href="${link}" target="_blank" class="btn-buy">Pedir no WhatsApp</a>
+                        </div>
+                    </div>
+                `;
+            });
+        });
+    </script>
+</body>
+</html>
