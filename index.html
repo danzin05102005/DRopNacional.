@@ -9,17 +9,19 @@
         :root {
             --bg-body: #ffffff; --bg-header: #ffffff; --bg-card: #ffffff;
             --text-main: #333333; --text-secondary: #666666; --text-card: #333333;
-            --border-color: #eeeeee; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
+            --border-color: #e0e0e0; --primary: #2ecc71; --hero-bg: #333333; --hero-text: #ffffff;
             --shadow: 0 5px 15px rgba(0,0,0,0.1); --animacao-display: none; 
+            --btn-theme-bg: #f0f0f0; /* Fundo do botão de tema visível */
         }
         
         /* TEMA ANO NOVO */
         body.tema-anonovo {
             --bg-body: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-            --bg-header: rgba(15, 12, 41, 0.9); --bg-card: #ffffff; 
+            --bg-header: rgba(15, 12, 41, 0.95); --bg-card: #ffffff; 
             --text-main: #ffffff; --text-secondary: #cccccc; --text-card: #333333; 
             --border-color: #FFD700; --primary: #FFD700; --hero-bg: transparent; --hero-text: #FFD700; 
             --shadow: 0 10px 25px rgba(255, 215, 0, 0.3); --animacao-display: block; 
+            --btn-theme-bg: rgba(255, 255, 255, 0.1);
         }
 
         /* --- 2. CSS GERAL --- */
@@ -36,15 +38,26 @@
         .slogan { font-size: 0.75rem; color: var(--text-secondary); font-weight: 500; letter-spacing: 0.5px; margin-top: 3px; font-style: italic; }
         .menu-items { display: flex; align-items: center; gap: 15px; }
         
-        .btn-zap-menu { background: var(--primary); color: #fff; padding: 8px 15px; text-decoration: none; border-radius: 20px; font-weight: bold; font-size: 0.9rem; transition: transform 0.2s; color: #fff; }
-        body.tema-anonovo .btn-zap-menu { color: #333 !important; }
-        .btn-zap-menu:hover { transform: scale(1.05); }
-
         .btn-rastreio { cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--text-main); text-decoration: none; border-bottom: 2px solid transparent; transition: 0.3s; }
         .btn-rastreio:hover { border-bottom: 2px solid var(--primary); }
 
-        .btn-theme { background: rgba(255,255,255,0.1); border: 1px solid var(--border-color); color: var(--text-main); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; font-size: 1.5rem; display: flex; align-items: center; justify-content: center; transition: all 0.4s; }
-        .btn-theme:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+        /* ESTILO DO BOTÃO DE TEMA CORRIGIDO (Mais visível) */
+        .btn-theme { 
+            background: var(--btn-theme-bg); 
+            border: 2px solid var(--border-color); /* Borda mais grossa */
+            color: var(--text-main); 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 1.5rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            transition: all 0.4s; 
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-theme:hover { background: #e2e2e2; transform: scale(1.1); }
         .girar { transform: rotate(360deg) scale(1.1); }
 
         .hero { background: var(--hero-bg); color: var(--hero-text); text-align: center; padding: 60px 20px; transition: background 0.5s ease; position: relative; z-index: 10; }
@@ -73,7 +86,7 @@
         @keyframes fadeIn { from {opacity: 0} to {opacity: 1} }
         @keyframes zoomIn { from {transform: scale(0.8)} to {transform: scale(1)} }
 
-        /* --- BOTÃO FLUTUANTE DO WHATSAPP (CORRIGIDO) --- */
+        /* --- BOTÃO FLUTUANTE DO WHATSAPP --- */
         .btn-whatsapp-float {
             position: fixed;
             bottom: 20px;
@@ -90,8 +103,8 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
             z-index: 2000;
             transition: all 0.3s ease;
-            padding: 0; /* Garante que não deforme */
-            line-height: 0; /* Remove espaços extras */
+            padding: 0; 
+            line-height: 0; 
         }
 
         .btn-whatsapp-float svg {
@@ -137,6 +150,7 @@
             </div>
             <div class="menu-items">
                 <a href="https://rastreamento.correios.com.br/app/index.php" target="_blank" class="btn-rastreio">Rastrear Pedido</a>
+                
                 <button id="btn-tema" class="btn-theme" title="Modo Ano Novo">🥂</button>
             </div>
         </div>
@@ -153,11 +167,10 @@
         </div>
     </div>
 
-    <a href="https://wa.me/5512992289185?text=Olá!%20Preciso%20de%20ajuda." 
+    <a href="https://wa.me/5511999999999?text=Olá!%20Preciso%20de%20ajuda." 
        class="btn-whatsapp-float" 
        target="_blank"
        title="Fale conosco no WhatsApp">
-        
         <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2M12.05 3.67C14.25 3.67 16.31 4.53 17.87 6.09C19.42 7.65 20.28 9.72 20.28 11.92C20.28 16.46 16.58 20.15 12.04 20.15C10.56 20.15 9.11 19.76 7.85 19L7.55 18.83L4.43 19.65L5.26 16.61L5.06 16.29C4.24 15 3.8 13.47 3.8 11.91C3.81 7.37 7.5 3.67 12.05 3.67M8.53 7.33C8.37 7.33 8.1 7.39 7.87 7.64C7.65 7.89 7 8.5 7 9.71C7 10.93 7.89 12.1 8 12.27C8.14 12.44 9.76 14.94 12.25 16C12.84 16.25 13.3 16.41 13.66 16.52C14.33 16.73 14.94 16.7 15.43 16.63C15.98 16.55 17.11 15.95 17.35 15.27C17.58 14.6 17.58 14.02 17.51 13.9C17.44 13.78 17.27 13.7 17 13.56C16.74 13.43 15.44 12.79 15.2 12.71C14.96 12.63 14.78 12.59 14.61 12.84C14.43 13.1 13.93 13.69 13.78 13.88C13.62 14.06 13.46 14.09 13.2 13.95C12.94 13.81 12.09 13.53 11.09 12.64C10.29 11.93 9.75 11.05 9.6 10.8C9.44 10.54 9.58 10.4 9.71 10.27C9.83 10.15 9.98 9.97 10.12 9.81C10.25 9.64 10.3 9.53 10.4 9.33C10.49 9.13 10.44 8.97 10.38 8.84C10.31 8.71 9.81 7.5 9.61 7C9.4 6.53 9.19 6.59 9.03 6.59C8.88 6.59 8.71 6.59 8.53 6.59V7.33Z"/>
         </svg>
@@ -180,7 +193,7 @@
             appId: "1:194938296952:web:c0e7c8ca068cf06fef2b8d"
         };
 
-        const MEU_ZAP = "5512992289185"; 
+        const MEU_ZAP = "5511999999999"; 
         
         document.getElementById('ano-atual').innerText = new Date().getFullYear();
         
